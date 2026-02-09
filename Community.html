@@ -1,38 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 网页名字 -->
-    <title>Campus Recycling</title>
-    <!-- css -->
-    <link rel="stylesheet" href="./css/styles.css">
-    <!-- 字体 要不要无所谓 -->
-     <link rel="stylesheet" href="">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community | Campus Recycling</title>
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
-<body>
-    <nav>
-        <div id="navigation">
-            <a href="./index.html">Campus Recycling</a>
-        </div>
-        <div id="navigation bar">
-            <a href="./index.html">Home</a>
-            <a href="./Goods.html">Goods</a>
-            <a href="./Community.html">Community</a>
-            <a href="./About Us.html">About Us</a>
-            <a href=""><img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In"></a>
-        </div>
-    </nav>
-    
-    <!-- footer -->
-     <footer>
-        <div id="contact">
-            <strong>Contack Us!</strong>
-            <p>Phone: 98998231</p>
-            <p>Address: James Cook University Singapor</p>
-            <p>Email: <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a></p>
-        </div>
-     </footer>
 
+<body>
+  <nav>
+    <div id="navigation">
+      <a href="./index.html">Campus Recycling</a>
+    </div>
+
+    <div id="navigation-bar">
+      <a href="./index.html">Home</a>
+      <a href="./Goods.html">Goods</a>
+      <a href="./Community.html" class="active">Community</a>
+      <a href="./AboutUs.html">About Us</a>
+      <a href="./Login.html">
+        <img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In" />
+      </a>
+    </div>
+  </nav>
+
+  <main class="community-page">
+    <section class="community-hero">
+      <h1>Community</h1>
+      <p>
+        Join the campus recycling community. Share tips, find events, and post items
+        for exchange.
+      </p>
+    </section>
+
+    <section class="community-cards">
+      <div class="card">
+        <h2>Recycle Tips</h2>
+        <p>Simple tips to recycle correctly on campus.</p>
+        <ul>
+          <li>Clean and dry bottles before recycling</li>
+          <li>Separate paper, plastic, and metal</li>
+          <li>Remove food waste from containers</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Upcoming Events</h2>
+        <p>Check out the latest campus green activities.</p>
+        <div class="event">
+          <strong>Recycling Workshop</strong>
+          <p>Date: 20 Feb</p>
+          <p>Location: Student Hub</p>
+        </div>
+        <div class="event">
+          <strong>Swap Day</strong>
+          <p>Date: 28 Feb</p>
+          <p>Location: Main Lobby</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Community Posts</h2>
+        <p>See what others are sharing or donating.</p>
+
+        <div class="post">
+          <strong>Old textbook for donation</strong>
+          <p>Condition: Good</p>
+          <p>Contact: yisong.luo@my.jcu.edu.au</p>
+        </div>
+
+        <div class="post">
+          <strong>Reusable bottle exchange</strong>
+          <p>Looking for a new bottle style.</p>
+          <p>Contact: 98998231</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="community-form">
+      <h2>Create a Post</h2>
+      <form>
+        <label for="title">Post Title</label>
+        <input id="title" type="text" placeholder="e.g., Donate old clothes" />
+
+        <label for="category">Category</label>
+        <select id="category">
+          <option>Donation</option>
+          <option>Exchange</option>
+          <option>Tips</option>
+          <option>Events</option>
+        </select>
+
+        <label for="details">Details</label>
+        <textarea id="details" rows="5" placeholder="Write your post details..."></textarea>
+
+        <button type="submit">Post</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div id="contact">
+      <strong>Contact Us!</strong>
+      <p>Phone: 98998231</p>
+      <p>Address: James Cook University Singapore</p>
+      <p>
+        Email:
+        <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
