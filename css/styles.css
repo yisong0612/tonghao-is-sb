@@ -308,3 +308,150 @@ footer a {
 .goods-upload button:hover {
   background-color: #1b5e20;
 }
+.page {
+  padding: 40px 60px;
+}
+
+.page-hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-hero h1 {
+  font-size: 36px;
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+.page-hero p {
+  color: #555;
+  font-size: 18px;
+}
+
+.page-links {
+  margin-top: 25px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.link-btn {
+  padding: 12px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 2px solid #2e7d32;
+  color: #2e7d32;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.link-btn:hover {
+  background-color: #e8f5e9;
+}
+
+.about-grid,
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.page-note {
+  margin-top: 25px;
+  text-align: center;
+  color: #444;
+  background: #e8f5e9;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.form-box {
+  max-width: 650px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.form-box label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-box button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-box button:hover {
+  background: #1b5e20;
+}
+
+.table-box {
+  overflow-x: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.order-table th,
+.order-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.order-table th {
+  color: #2e7d32;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.done {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.pending {
+  background: #fff8e1;
+  color: #8d6e63;
+}
+
+.cancel {
+  background: #ffebee;
+  color: #c62828;
+}
