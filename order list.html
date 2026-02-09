@@ -1,38 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 网页名字 -->
-    <title>Campus Recycling</title>
-    <!-- css -->
-    <link rel="stylesheet" href="./css/styles.css">
-    <!-- 字体 要不要无所谓 -->
-     <link rel="stylesheet" href="">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order List | Campus Recycling</title>
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
-<body>
-    <nav>
-        <div id="navigation">
-            <a href="./index.html">Campus Recycling</a>
-        </div>
-        <div id="navigation bar">
-            <a href="./index.html">Home</a>
-            <a href="./Goods.html">Goods</a>
-            <a href="./Community.html">Community</a>
-            <a href="./About Us.html">About Us</a>
-            <a href=""><img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In"></a>
-        </div>
-    </nav>
-    
-    <!-- footer -->
-     <footer>
-        <div id="contact">
-            <strong>Contack Us!</strong>
-            <p>Phone: 98998231</p>
-            <p>Address: James Cook University Singapor</p>
-            <p>Email: <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a></p>
-        </div>
-     </footer>
 
+<body>
+  <nav>
+    <div id="navigation">
+      <a href="./index.html">Campus Recycling</a>
+    </div>
+    <div id="navigation-bar">
+      <a href="./index.html">Home</a>
+      <a href="./Goods.html">Goods</a>
+      <a href="./Community.html">Community</a>
+      <a href="./AboutUs.html">About Us</a>
+      <a href="./Login.html">
+        <img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In" />
+      </a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="page-hero">
+      <h1>Order List</h1>
+      <p>Your recent orders and exchange requests.</p>
+    </section>
+
+    <section class="table-box">
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#1001</td>
+            <td>Used Textbook</td>
+            <td>$10</td>
+            <td><span class="badge done">Completed</span></td>
+            <td>08 Feb</td>
+          </tr>
+          <tr>
+            <td>#1002</td>
+            <td>Reusable Bottle</td>
+            <td>$5</td>
+            <td><span class="badge pending">Pending</span></td>
+            <td>07 Feb</td>
+          </tr>
+          <tr>
+            <td>#1003</td>
+            <td>Desk Lamp</td>
+            <td>$6</td>
+            <td><span class="badge cancel">Cancelled</span></td>
+            <td>05 Feb</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <div id="contact">
+      <strong>Contact Us!</strong>
+      <p>Phone: 98998231</p>
+      <p>Address: James Cook University Singapore</p>
+      <p>Email: <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a></p>
+    </div>
+  </footer>
 </body>
 </html>
