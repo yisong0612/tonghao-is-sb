@@ -1,56 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 网页名字 -->
-    <title>Campus Recycling</title>
-    <!-- css -->
-    <link rel="stylesheet" href="./css/styles.css">
-    <!-- 字体 要不要无所谓 -->
-     <link rel="stylesheet" href="">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Recycling</title>
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
-<body>
-    <nav>
-        <div id="navigation">
-            <a href="./index.html">Campus Recycling</a>
-        </div>
-        <div id="navigation bar">
-            <a href="./index.html">Home</a>
-            <a href="./Goods.html">Goods</a>
-            <a href="./Community.html">Community</a>
-            <a href="./About Us.html">About Us</a>
-            <a href=""><img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In"></a>
-        </div>
-    </nav>
-    <!-- 绿色出行之类的公益话 -->
-    <section id="our purpose">
-        <p>test</p>
-    </section> 
-    <!-- strat now -->
-     <a href="./Goods.html">Strat now</a>
-    <!-- 主页图片 -->
-     <section style="background-image: url('./img/hero图.png');">
-        <h1>Welcome to Campus Recycling</h1>
-        <p>We will offer you a customized secure second-hand trading platform.</p>
-     </section>
-     <!-- 最近成交 -->
-      <section id="Recent transactions">
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <!-- 这里可能要连接数据库去获取 -->
-      </section>
-    <!-- 脚标 -->
-     <footer>
-        <div id="contact">
-            <strong>Contack Us!</strong>
-            <p>Phone: 98998231</p>
-            <p>Address: James Cook University Singapor</p>
-            <p>Email: <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a></p>
-        </div>
-     </footer>
 
+<body>
+  <nav>
+    <div id="navigation">
+      <a href="./index.html">Campus Recycling</a>
+    </div>
+
+    <div id="navigation-bar">
+      <a href="./index.html" class="active">Home</a>
+      <a href="./Goods.html">Goods</a>
+      <a href="./Community.html">Community</a>
+      <a href="./AboutUs.html">About Us</a>
+      <a href="./Login.html">
+        <img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In" />
+      </a>
+    </div>
+  </nav>
+
+  <main class="home-page">
+    <section class="home-hero">
+      <h1>Reduce Waste. Reuse Goods. Build a Green Campus.</h1>
+      <p>
+        Campus Recycling helps students exchange second-hand items,
+        share recycling tips, and support a sustainable university life.
+      </p>
+      <div class="hero-buttons">
+        <a href="./Goods.html" class="primary-btn">Browse Goods</a>
+        <a href="./Community.html" class="secondary-btn">Join Community</a>
+      </div>
+    </section>
+
+    <section class="home-features">
+      <div class="feature-card">
+        <h2>♻️ Recycle Smarter</h2>
+        <p>Learn how to sort waste correctly and reduce landfill impact.</p>
+      </div>
+
+      <div class="feature-card">
+        <h2>🛍 Exchange Goods</h2>
+        <p>Buy, sell, or donate second-hand items within the campus.</p>
+      </div>
+
+      <div class="feature-card">
+        <h2>🤝 Community Events</h2>
+        <p>Join workshops, swap days, and green activities.</p>
+      </div>
+    </section>
+
+    <section class="home-about">
+      <h2>About Campus Recycling</h2>
+      <p>
+        Our goal is to make campus life more sustainable by encouraging
+        students to reuse resources and reduce waste. Together, we can
+        create a greener future.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div id="contact">
+      <strong>Contact Us!</strong>
+      <p>Phone: 98998231</p>
+      <p>Address: James Cook University Singapore</p>
+      <p>
+        Email:
+        <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
