@@ -1,38 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 网页名字 -->
-    <title>Campus Recycling</title>
-    <!-- css -->
-    <link rel="stylesheet" href="./css/styles.css">
-    <!-- 字体 要不要无所谓 -->
-     <link rel="stylesheet" href="">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goods | Campus Recycling</title>
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
-<body>
-    <nav>
-        <div id="navigation">
-            <a href="./index.html">Campus Recycling</a>
-        </div>
-        <div id="navigation bar">
-            <a href="./index.html">Home</a>
-            <a href="./Goods.html">Goods</a>
-            <a href="./Community.html">Community</a>
-            <a href="./About Us.html">About Us</a>
-            <a href=""><img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In"></a>
-        </div>
-    </nav>
-    
-    <!-- footer -->
-     <footer>
-        <div id="contact">
-            <strong>Contack Us!</strong>
-            <p>Phone: 98998231</p>
-            <p>Address: James Cook University Singapor</p>
-            <p>Email: <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a></p>
-        </div>
-     </footer>
 
+<body>
+  <nav>
+    <div id="navigation">
+      <a href="./index.html">Campus Recycling</a>
+    </div>
+
+    <div id="navigation-bar">
+      <a href="./index.html">Home</a>
+      <a href="./Goods.html" class="active">Goods</a>
+      <a href="./Community.html">Community</a>
+      <a href="./AboutUs.html">About Us</a>
+      <a href="./Login.html">
+        <img src="./img/a8ff34e58a425c4935dc708065457252.png" alt="Log In" />
+      </a>
+    </div>
+  </nav>
+
+  <main class="goods-page">
+    <section class="goods-hero">
+      <h1>Goods</h1>
+      <p>
+        Browse second-hand items and recycled goods. Save money and reduce waste.
+      </p>
+    </section>
+
+    <section class="goods-controls">
+      <div class="goods-search">
+        <input type="text" placeholder="Search goods..." />
+      </div>
+
+      <div class="goods-filters">
+        <select>
+          <option>All Categories</option>
+          <option>Books</option>
+          <option>Electronics</option>
+          <option>Clothes</option>
+          <option>Daily Items</option>
+        </select>
+
+        <select>
+          <option>Sort: Newest</option>
+          <option>Sort: Lowest Price</option>
+          <option>Sort: Highest Price</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="goods-grid">
+      <div class="goods-card">
+        <div class="goods-img"></div>
+        <h2>Used Textbook</h2>
+        <p class="goods-meta">Category: Books</p>
+        <p class="goods-price">$10</p>
+        <button class="goods-btn">View Details</button>
+      </div>
+
+      <div class="goods-card">
+        <div class="goods-img"></div>
+        <h2>Reusable Bottle</h2>
+        <p class="goods-meta">Category: Daily Items</p>
+        <p class="goods-price">$5</p>
+        <button class="goods-btn">View Details</button>
+      </div>
+
+      <div class="goods-card">
+        <div class="goods-img"></div>
+        <h2>Second-hand Hoodie</h2>
+        <p class="goods-meta">Category: Clothes</p>
+        <p class="goods-price">$12</p>
+        <button class="goods-btn">View Details</button>
+      </div>
+
+      <div class="goods-card">
+        <div class="goods-img"></div>
+        <h2>Old Keyboard</h2>
+        <p class="goods-meta">Category: Electronics</p>
+        <p class="goods-price">$8</p>
+        <button class="goods-btn">View Details</button>
+      </div>
+
+      <div class="goods-card">
+        <div class="goods-img"></div>
+        <h2>Notebook Set</h2>
+        <p class="goods-meta">Category: Books</p>
+        <p class="goods-price">$3</p>
+        <button class="goods-btn">View Details</button>
+      </div>
+
+      <div class="goods-card">
+        <div class="goods-img"></div>
+        <h2>Desk Lamp</h2>
+        <p class="goods-meta">Category: Daily Items</p>
+        <p class="goods-price">$6</p>
+        <button class="goods-btn">View Details</button>
+      </div>
+    </section>
+
+    <section class="goods-upload">
+      <h2>List Your Item</h2>
+      <form>
+        <label for="gtitle">Item Title</label>
+        <input id="gtitle" type="text" placeholder="e.g., Calculator" />
+
+        <label for="gcategory">Category</label>
+        <select id="gcategory">
+          <option>Books</option>
+          <option>Electronics</option>
+          <option>Clothes</option>
+          <option>Daily Items</option>
+        </select>
+
+        <label for="gprice">Price</label>
+        <input id="gprice" type="text" placeholder="e.g., 8" />
+
+        <label for="gdetails">Details</label>
+        <textarea id="gdetails" rows="5" placeholder="Describe your item..."></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div id="contact">
+      <strong>Contact Us!</strong>
+      <p>Phone: 98998231</p>
+      <p>Address: James Cook University Singapore</p>
+      <p>
+        Email:
+        <a href="mailto:yisong.luo@my.jcu.edu.au">yisong.luo@my.jcu.edu.au</a>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
