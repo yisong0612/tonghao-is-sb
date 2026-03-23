@@ -1,0 +1,258 @@
+/* style.css - 校园二手网站全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", "思源黑体", sans-serif;
+}
+/* 全局样式 */
+body {
+    background-color: #f5f7fa;
+    color: #333;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+/* 头部导航 - 固定顶部 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+.nav-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #409eff;
+}
+.logo span {
+    color: #67c23a;
+}
+.nav-list {
+    display: flex;
+    list-style: none;
+    align-items: center; /* 新增：让导航和头像垂直居中 */
+}
+.nav-list li {
+    margin-left: 30px;
+}
+.nav-list a {
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+.nav-list a:hover {
+    color: #409eff;
+    border-bottom: 2px solid #409eff;
+}
+.publish-btn {
+    background-color: #67c23a;
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+.publish-btn:hover {
+    background-color: #5eba2f;
+    border-bottom: none !important;
+}
+/* 圆形头像框样式 - 核心新增 */
+.avatar-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* 圆形 */
+    overflow: hidden; /* 裁剪超出部分 */
+    border: 2px solid #e6e6e6;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+.avatar-box:hover {
+    border-color: #409eff;
+}
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持图片比例 */
+}
+/* 搜索栏 - 轮播下方 */
+.search-section {
+    margin-top: 90px;
+    padding: 20px 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.search-input {
+    width: 60%;
+    max-width: 600px;
+    height: 45px;
+    padding: 0 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+.search-input:focus {
+    border: 1px solid #409eff;
+}
+.search-btn {
+    height: 45px;
+    padding: 0 25px;
+    background-color: #409eff;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+.search-btn:hover {
+    background-color: #3393ee;
+}
+/* 二手分类 - 校园高频品类 */
+.category-section {
+    margin: 30px 0;
+}
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border-left: 4px solid #409eff;
+}
+.category-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.category-card {
+    width: 80px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.category-card:hover {
+    transform: translateY(-5px);
+}
+.category-card i {
+    font-size: 30px;
+    color: #409eff;
+    margin-bottom: 10px;
+}
+/* 推荐商品 - 校园闲置精选 */
+.goods-section {
+    margin: 30px 0 50px;
+}
+.goods-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+.goods-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.goods-card:hover {
+    transform: translateY(-5px);
+}
+.goods-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.goods-info {
+    padding: 15px;
+}
+.goods-title {
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+.goods-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f56c6c;
+}
+.goods-owner {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+}
+/* 底部 - 校园专属信息 */
+footer {
+    background-color: #fff;
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid #e6e6e6;
+}
+.footer-text {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.8;
+}
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .nav-list li {
+        margin-left: 15px;
+    }
+    .nav-list a {
+        font-size: 14px;
+    }
+    .publish-btn {
+        padding: 6px 15px;
+    }
+    .avatar-box {
+        width: 35px;
+        height: 35px; /* 移动端头像略小 */
+    }
+    .search-input {
+        width: 70%;
+    }
+    .category-wrap {
+        gap: 15px;
+    }
+    .goods-wrap {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+    .goods-img {
+        height: 140px;
+    }
+}

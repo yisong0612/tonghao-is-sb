@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园二手集市 - 你的校园闲置交易平台</title>
+    <!-- 引入独立的CSS文件 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 头部导航（改造后） -->
+    <header>
+        <div class="container nav-wrap">
+            <a href="#" class="logo">校园<span>二手</span>集市</a>
+            <ul class="nav-list">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">全部商品</a></li>
+                <li><a href="#">社区</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#" class="publish-btn">发布闲置</a></li>
+                <!-- 新增：圆形头像框（默认头像） -->
+                <li class="avatar-box">
+                    <img src="https://picsum.photos/40/40?random=100" alt="用户头像" class="avatar-img">
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 搜索栏 -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="搜索校园闲置：教材、数码、生活用品...">
+                <button class="search-btn"><i class="fas fa-search"></i> 搜索</button>
+            </div>
+        </section>
+
+        <!-- 二手分类（校园高频） -->
+        <section class="category-section">
+            <h2 class="section-title">二手分类</h2>
+            <div class="category-wrap">
+                <div class="category-card">
+                    <i class="fas fa-book"></i>
+                    <span>教材教辅</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-laptop"></i>
+                    <span>数码产品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-bed"></i>
+                    <span>生活用品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-tshirt"></i>
+                    <span>服饰鞋包</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-gamepad"></i>
+                    <span>文体用品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-bicycle"></i>
+                    <span>代步工具</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-gift"></i>
+                    <span>美妆饰品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <span>更多分类</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 推荐商品 -->
+        <section class="goods-section">
+            <h2 class="section-title">校园精选闲置</h2>
+            <div class="goods-wrap">
+                <!-- 商品卡片1 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=1" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">大学高数教材 全新未用 送习题册</h3>
+                        <p class="goods-price">¥25</p>
+                        <p class="goods-owner">发布人：大一数学系</p>
+                    </div>
+                </div>
+                <!-- 商品卡片2 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=2" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">小米平板5 6+128G 几乎全新 带保护套</h3>
+                        <p class="goods-price">¥999</p>
+                        <p class="goods-owner">发布人：大三计科</p>
+                    </div>
+                </div>
+                <!-- 商品卡片3 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=3" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">宿舍折叠桌 学习桌 高度可调</h3>
+                        <p class="goods-price">¥30</p>
+                        <p class="goods-owner">发布人：大二文学院</p>
+                    </div>
+                </div>
+                <!-- 商品卡片4 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=4" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">山地自行车 26寸 九成新 送锁和挡泥板</h3>
+                        <p class="goods-price">¥350</p>
+                        <p class="goods-owner">发布人：大四经管</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="footer-text">
+            <p>校园二手集市 © 2025 本平台仅面向本校学生，杜绝校外商家</p>
+            <p>交易须知：线下当面交易，验货付款，谨防诈骗</p>
+        </div>
+    </footer>
+</body>
+</html>
