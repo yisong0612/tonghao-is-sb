@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园二手集市 - 你的校园闲置交易平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "思源黑体", sans-serif;
+        }
+        /* 全局样式 */
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* 头部导航 - 固定顶部 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #409eff;
+        }
+        .logo span {
+            color: #67c23a;
+        }
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+        .nav-list li {
+            margin-left: 30px;
+        }
+        .nav-list a {
+            font-size: 16px;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .nav-list a:hover {
+            color: #409eff;
+            border-bottom: 2px solid #409eff;
+        }
+        .publish-btn {
+            background-color: #67c23a;
+            color: #fff !important;
+            padding: 8px 20px;
+            border-radius: 20px;
+        }
+        .publish-btn:hover {
+            background-color: #5eba2f;
+            border-bottom: none !important;
+        }
+        /* 搜索栏 - 轮播下方 */
+        .search-section {
+            margin-top: 90px;
+            padding: 20px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .search-input {
+            width: 60%;
+            max-width: 600px;
+            height: 45px;
+            padding: 0 20px;
+            border: 1px solid #e6e6e6;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        .search-input:focus {
+            border: 1px solid #409eff;
+        }
+        .search-btn {
+            height: 45px;
+            padding: 0 25px;
+            background-color: #409eff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .search-btn:hover {
+            background-color: #3393ee;
+        }
+        /* 二手分类 - 校园高频品类 */
+        .category-section {
+            margin: 30px 0;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #409eff;
+        }
+        .category-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .category-card {
+            width: 80px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        .category-card i {
+            font-size: 30px;
+            color: #409eff;
+            margin-bottom: 10px;
+        }
+        /* 推荐商品 - 校园闲置精选 */
+        .goods-section {
+            margin: 30px 0 50px;
+        }
+        .goods-wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .goods-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .goods-card:hover {
+            transform: translateY(-5px);
+        }
+        .goods-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .goods-info {
+            padding: 15px;
+        }
+        .goods-title {
+            font-size: 16px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 10px;
+        }
+        .goods-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f56c6c;
+        }
+        .goods-owner {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+        /* 底部 - 校园专属信息 */
+        footer {
+            background-color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #e6e6e6;
+        }
+        .footer-text {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .nav-list li {
+                margin-left: 15px;
+            }
+            .nav-list a {
+                font-size: 14px;
+            }
+            .publish-btn {
+                padding: 6px 15px;
+            }
+            .search-input {
+                width: 70%;
+            }
+            .category-wrap {
+                gap: 15px;
+            }
+            .goods-wrap {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+            .goods-img {
+                height: 140px;
+            }
+        }
+    </style>
+    <!-- 引入图标库（校园场景常用） -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container nav-wrap">
+            <a href="#" class="logo">校园<span>二手</span>集市</a>
+            <ul class="nav-list">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">全部商品</a></li>
+                <li><a href="#">教材专区</a></li>
+                <li><a href="#">数码专区</a></li>
+                <li><a href="#" class="publish-btn">发布闲置</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 搜索栏 -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="搜索校园闲置：教材、数码、生活用品...">
+                <button class="search-btn"><i class="fas fa-search"></i> 搜索</button>
+            </div>
+        </section>
+
+        <!-- 二手分类（校园高频） -->
+        <section class="category-section">
+            <h2 class="section-title">二手分类</h2>
+            <div class="category-wrap">
+                <div class="category-card">
+                    <i class="fas fa-book"></i>
+                    <span>教材教辅</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-laptop"></i>
+                    <span>数码产品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-bed"></i>
+                    <span>生活用品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-tshirt"></i>
+                    <span>服饰鞋包</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-gamepad"></i>
+                    <span>文体用品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-bicycle"></i>
+                    <span>代步工具</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-gift"></i>
+                    <span>美妆饰品</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <span>更多分类</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 推荐商品 -->
+        <section class="goods-section">
+            <h2 class="section-title">校园精选闲置</h2>
+            <div class="goods-wrap">
+                <!-- 商品卡片1 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=1" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">大学高数教材 全新未用 送习题册</h3>
+                        <p class="goods-price">¥25</p>
+                        <p class="goods-owner">发布人：大一数学系</p>
+                    </div>
+                </div>
+                <!-- 商品卡片2 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=2" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">小米平板5 6+128G 几乎全新 带保护套</h3>
+                        <p class="goods-price">¥999</p>
+                        <p class="goods-owner">发布人：大三计科</p>
+                    </div>
+                </div>
+                <!-- 商品卡片3 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=3" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">宿舍折叠桌 学习桌 高度可调</h3>
+                        <p class="goods-price">¥30</p>
+                        <p class="goods-owner">发布人：大二文学院</p>
+                    </div>
+                </div>
+                <!-- 商品卡片4 -->
+                <div class="goods-card">
+                    <img src="https://picsum.photos/240/180?random=4" alt="校园二手商品" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">山地自行车 26寸 九成新 送锁和挡泥板</h3>
+                        <p class="goods-price">¥350</p>
+                        <p class="goods-owner">发布人：大四经管</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="footer-text">
+            <p>校园二手集市 © 2025 本平台仅面向本校学生，杜绝校外商家</p>
+            <p>交易须知：线下当面交易，验货付款，谨防诈骗</p>
+        </div>
+    </footer>
+</body>
+</html>
