@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>发布闲置 - 校园二手集市</title>
+    <title>Campus Second-hand Community - Your campus idle goods trading platform</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -26,61 +26,61 @@
 
     <!-- 发布闲置页面主体 -->
     <div class="page-container">
-        <h2 class="page-title">发布闲置商品</h2>
+        <h2 class="page-title">List available items for sale</h2>
         
         <form class="publish-form">
             <div class="form-group">
-                <label for="goods-title">商品标题</label>
-                <input type="text" id="goods-title" placeholder="请输入商品标题（如：全新高数教材 送习题册）">
+                <label for="goods-title">title</label>
+                <input type="text" id="goods-title" placeholder="Please enter the product title (for example: New Calculus textbook with accompanying exercise book)">
             </div>
 
             <div class="form-group">
-                <label for="goods-category">商品分类</label>
+                <label for="goods-category">classify</label>
                 <select id="goods-category">
-                    <option value="">请选择分类</option>
-                    <option value="book">教材教辅</option>
-                    <option value="digital">数码产品</option>
-                    <option value="life">生活用品</option>
-                    <option value="clothes">服饰鞋包</option>
-                    <option value="sports">文体用品</option>
-                    <option value="transport">代步工具</option>
-                    <option value="other">其他</option>
+                    <option value="">Please select a category</option>
+                    <option value="book">Textbooks & Supplementary Materials</option>
+                    <option value="digital">Digital Products</option>
+                    <option value="life">Daily Necessities</option>
+                    <option value="clothes">Apparel, Shoes & Bags</option>
+                    <option value="sports">Sports & Cultural Goods</option>
+                    <option value="transport">Transportation Tools</option>
+                    <option value="other">other</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="goods-price">商品价格（元）</label>
-                <input type="number" id="goods-price" placeholder="请输入商品价格，0表示免费送">
+                <label for="goods-price">price</label>
+                <input type="number" id="goods-price" placeholder="type price, 0 is for free">
             </div>
 
             <div class="form-group">
-                <label for="goods-desc">商品描述</label>
-                <textarea id="goods-desc" placeholder="请详细描述商品情况：新旧程度、使用时长、是否有破损、交易方式等"></textarea>
+                <label for="goods-desc">information</label>
+                <textarea id="goods-desc" placeholder="Please provide a detailed description of the product: its condition (new or used), usage duration, any damages, and the transaction method, etc."></textarea>
             </div>
 
             <div class="form-group">
-                <label>商品图片（必填，最多5张）</label>
+                <label>Product images (required, up to 5 images)</label>
                 <div class="upload-area">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <p>点击或拖拽图片到此处上传</p>
-                    <p style="font-size: 12px;">支持JPG/PNG格式，单张不超过5MB</p>
+                    <p>Click or drag the image here to upload it.</p>
+                    <p style="font-size: 12px;">Supports JPG/PNG formats. Each image should not exceed 5MB.</p>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="contact-way">联系方式</label>
-                <input type="text" id="contact-way" placeholder="请输入微信/QQ/手机号（方便买家联系）">
+                <label for="contact-way">contact information</label>
+                <input type="text" id="contact-way" placeholder="Please enter your mobile phone number.">
             </div>
 
-            <button type="button" class="submit-btn">发布商品</button>
+            <button type="button" class="submit-btn">publish</button>
         </form>
     </div>
 
     <!-- 底部（复用） -->
     <footer>
         <div class="footer-text">
-            <p>校园二手集市 © 2025 本平台仅面向本校学生，杜绝校外商家</p>
-            <p>交易须知：线下当面交易，验货付款，谨防诈骗</p>
+            <p>Campus Second-hand Market © 2025 This platform is only open to students of this school. All校外 merchants are prohibited.</p>
+            <p>Transaction Instructions: Conduct the transaction face-to-face in person, inspect the goods and make payment. Be cautious of fraud.</p>
         </div>
     </footer>
 </body>
