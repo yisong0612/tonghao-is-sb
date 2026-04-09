@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Second-hand Community - Your campus idle goods trading platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  
+    <header>
+        <div class="container nav-wrap">
+            <a href="home.html" class="logo">Campus<span>Second-hand</span>Market</a>
+            <ul class="nav-list">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="all goods.html">All goods</a></li>
+                <li><a href="community.html" style="color: #409eff; border-bottom: 2px solid #409eff;">Community</a></li>
+                <li><a href="publish.html" class="publish-btn">Sell Items</a></li>
+                <li class="avatar-box">
+                    <img src="./img/Default user avatar.png" alt="Default user avatar" class="avatar-img" id="navAvatar">
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            
+           
+        </script>
+    </header>
+
+   
+<div class="main-content">
+    <div class="page-container">
+
+        <h2 class="page-title">Community</h2>
+
+        <button id="openPostBox" style="
+            margin-bottom:20px;
+            background:#409eff;
+            color:#fff;
+            border:none;
+            padding:10px 20px;
+            border-radius:6px;
+            cursor:pointer;"> + New Post
+        </button>
+
+    <div class="community-posts">
+
+        <div class="post-card">
+            <div class="post-header">
+                <img src="https://picsum.photos/40/40?random=10" class="post-avatar">
+                    <span class="post-author">Li</span>
+                    <span class="post-time">2025-03-22 14:30</span>
+            </div>
+
+                <div class="post-content">
+                    Selling my used laptop...
+                </div>
+
+                <img src="https://picsum.photos/800/400?random=10" class="post-img">
+
+                <div class="post-footer">
+                    <span><i class="fas fa-thumbs-up"></i> (28)</span>
+                    <span class="open-chat"><i class="fas fa-comment"></i> (0)</span>
+                    <span><i class="fas fa-share"></i> (3)</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+        
+        <div id="postModal" style="
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.5);
+        justify-content:center;
+        align-items:center;
+        z-index:2000;
+    ">
+        <div style="
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            width:300px;
+        ">
+            <h3>Create Post</h3>
+
+            <textarea id="postText" placeholder="Write something..."
+                style="width:100%; height:80px; margin-bottom:10px;"></textarea>
+
+            <input type="file" id="postImage" accept="image/*" style="margin-bottom:10px;">
+
+            <div style="text-align:right;">
+                <button id="cancelPost">Cancel</button>
+                <button id="submitPost" style="background:#409eff;color:#fff;">Post</button>
+            </div>
+        </div>
+    </div>
+    
+        <div id="chatModal" style="
+            display:none;
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            width:300px;
+            height:400px;
+            background:#fff;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+            z-index:2000;
+            flex-direction:column;
+        ">
+
+            
+            <div style="
+                background:#409eff;
+                color:#fff;
+                padding:10px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                border-top-left-radius:10px;
+                border-top-right-radius:10px;
+            ">
+                <span>Chat</span>
+                <span id="closeChat" style="cursor:pointer;">✖</span>
+            </div>
+            
+            <div id="chatBody" style="
+                flex:1;
+                padding:10px;
+                overflow-y:auto;
+                font-size:14px;
+            "></div>
+
+            
+            <div style="display:flex; border-top:1px solid #ddd;">
+                <input id="chatInput" type="text" placeholder="Type something..."
+                    style="flex:1; border:none; padding:8px;">
+                <button id="sendBtn" style="
+                    background:#409eff;
+                    color:#fff;
+                    border:none;
+                    padding:8px 12px;
+                    cursor:pointer;
+                ">Send</button>
+            </div>
+
+        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const navAvatar = document.getElementById('navAvatar');
+
+            
+            fetch('../db/data.json')  
+                .then(res => res.json())
+                .then(users => {
+                    const currentUser = users[0];
+
+                    
+                    navAvatar.src = currentUser.avatar || './img/Default user avatar.png';
+                })
+                .catch(err => console.error("error user message:", err));
+
+            
+            navAvatar.addEventListener('click', () => {
+                window.location.href = 'user.html';
+            });
+
+            
+            const modal = document.getElementById('postModal');
+            const openBtn = document.getElementById('openPostBox');
+            const cancelBtn = document.getElementById('cancelPost');
+            const submitBtn = document.getElementById('submitPost');
+            const postList = document.querySelector('.community-posts');
+
+            openBtn.onclick = () => modal.style.display = 'flex';
+            cancelBtn.onclick = () => modal.style.display = 'none';
+
+            submitBtn.onclick = () => {
+
+                const text = document.getElementById('postText').value.trim();
+                const file = document.getElementById('postImage').files[0];
+
+                if (text === "") {
+                    alert("Content cannot be empty!");
+                    return;
+                }
+
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    const imgSrc = file ? e.target.result : "";
+
+                    const now = new Date();
+                    const timeStr =
+                        now.getFullYear() + "-" +
+                        String(now.getMonth()+1).padStart(2,'0') + "-" +
+                        String(now.getDate()).padStart(2,'0') + " " +
+                        String(now.getHours()).padStart(2,'0') + ":" +
+                        String(now.getMinutes()).padStart(2,'0');
+
+                    const post = document.createElement('div');
+                    post.className = 'post-card';
+
+                    post.innerHTML = `
+                        <div class="post-header">
+                            <img src="./img/Default user avatar.png" class="post-avatar">
+                            <span class="post-author">You</span>
+                            <span class="post-time">${timeStr}</span>
+                        </div>
+
+                        <div class="post-content">${text}</div>
+
+                        ${imgSrc ? `<img src="${imgSrc}" class="post-img">` : ""}
+
+                        <div class="post-footer">
+                            <span><i class="fas fa-thumbs-up"></i> (0)</span>
+
+                            <span class="open-chat" style="cursor:pointer;">
+                                <i class="fas fa-comment"></i> (0)
+                            </span>
+
+                            <span><i class="fas fa-share"></i> (0)</span>
+                        </div>
+                    `;
+
+                    postList.prepend(post);
+
+                    modal.style.display = 'none';
+                    document.getElementById('postText').value = "";
+                    document.getElementById('postImage').value = "";
+
+                    bindChat(post);
+                };
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    reader.onload({ target: { result: "" } });
+                }
+            };
+
+           
+            const chatModal = document.getElementById('chatModal');
+            const chatBody = document.getElementById('chatBody');
+            const input = document.getElementById('chatInput');
+
+            function bindChat(scope=document) {
+                scope.querySelectorAll('.open-chat').forEach(btn => {
+                    btn.onclick = () => {
+                        chatModal.style.display = 'flex';
+                        chatBody.innerHTML = "";
+
+                        const msg = document.createElement('div');
+                        msg.innerHTML = `<span style="background:#eee;padding:6px 10px;border-radius:8px;">
+                            Hello! laptop for sell！
+                        </span>`;
+                        chatBody.appendChild(msg);
+                    };
+                });
+            }
+
+            bindChat();
+
+            document.getElementById('closeChat').onclick = () => {
+                chatModal.style.display = 'none';
+            };
+
+            document.getElementById('sendBtn').onclick = sendMessage;
+
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            function sendMessage() {
+
+                const text = input.value.trim();
+                if (!text) return;
+
+                const msg = document.createElement('div');
+                msg.style.textAlign = "right";
+
+                msg.innerHTML = `
+                    <span style="background:#409eff;color:#fff;padding:6px 10px;border-radius:8px;">
+                        ${text}
+                    </span>
+                `;
+
+                chatBody.appendChild(msg);
+                input.value = "";
+
+                setTimeout(() => {
+                    const reply = document.createElement('div');
+                    reply.innerHTML = `
+                        <span style="background:#eee;padding:6px 10px;border-radius:8px;">
+                            Sure, still available!
+                        </span>
+                    `;
+                    chatBody.appendChild(reply);
+                }, 800);
+            }
+
+        });
+        document.addEventListener('click', function (e) {
+
+            const isLoggedIn = localStorage.getItem('currentUser');
+
+            if (!isLoggedIn) {
+
+                
+                const target = e.target.closest('a, button, .open-chat');
+
+                if (target) {
+                    e.preventDefault(); 
+
+                    alert("Please login first!");
+
+                    
+                    setTimeout(() => {
+                        window.location.href = "login_and_signup.html";
+                    }, 500);
+                }
+            }
+
+        });
+    </script>
+    
+    <footer>
+        <div class="footer-text">
+            <p>Campus Second-hand Market © 2025 This platform is only open to students of this school. </p>
+        </div>
+    </footer>
+</body>
+</html>
