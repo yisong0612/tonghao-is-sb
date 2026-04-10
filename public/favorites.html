@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Second-hand Market - Favorites</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tip-box {
+            display: none;
+            max-width: 1200px;
+            margin: 90px auto 0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .tip-box.error { display: block; background: #fff2f0; border: 1px solid #ffccc7; color: #cf1322; }
+        .tip-box.success { display: block; background: #f6ffed; border: 1px solid #b7eb8f; color: #389e0d; }
+        .goods-card {
+            cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: #fff; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: relative;
+        }
+        .goods-card:hover { transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+        .goods-img { width: 100%; height: 220px; object-fit: cover; display: block; background: #f5f5f5; }
+        .goods-info { padding: 14px; }
+        .goods-title { margin: 0 0 10px; font-size: 18px; color: #333; line-height: 1.4; }
+        .goods-price { margin: 0 0 8px; color: #f56c6c; font-size: 20px; font-weight: bold; }
+        .goods-owner, .goods-category, .goods-status { margin: 0 0 6px; color: #666; font-size: 14px; }
+        .favorite-btn {
+            position: absolute; top: 12px; right: 12px; z-index: 5; width: 36px; height: 36px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.92); color: #f56c6c; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+        .empty-box {
+            width: 100%; padding: 50px 20px; text-align: center; color: #666; font-size: 18px;
+            background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .detail-modal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+            z-index: 2000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .detail-modal.show { display: flex; }
+        .detail-card {
+            width: 100%; max-width: 780px; max-height: 90vh; overflow-y: auto;
+            background: #fff; border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+            padding: 24px; position: relative;
+        }
+        .detail-close {
+            position: absolute; top: 14px; right: 14px; border: none; background: #f56c6c; color: #fff;
+            width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 18px;
+        }
+        .detail-image { width: 100%; height: 320px; object-fit: cover; border-radius: 10px; background: #f5f5f5; margin-bottom: 18px; }
+        .detail-title { margin: 0 0 12px; font-size: 28px; color: #333; }
+        .detail-price { margin: 0 0 12px; font-size: 24px; color: #f56c6c; font-weight: bold; }
+        .detail-text { margin: 0 0 10px; color: #555; line-height: 1.7; font-size: 15px; word-break: break-word; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-wrap">
+            <a href="home.html" class="logo">Campus<span>Second-hand</span>Market</a>
+            <ul class="nav-list">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="all goods.html">All goods</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="publish.html" class="publish-btn">Sell Items</a></li>
+                <li class="avatar-box">
+                    <img src="./img/Default user avatar.png" alt="Default user avatar" class="avatar-img" id="navAvatar">
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="tipBox" class="tip-box"></div>
+
+    <div class="user-menu">
+        <a href="cart.html"><img src="img/cart.png" alt="icon"><span>Cart</span></a>
+        <a href="pending_payment.html"><img src="img/pending_payment.png" alt="icon"><span>Pending Payment</span></a>
+        <a href="purchase_history.html"><img src="img/purchase_history.png" alt="icon"><span>Purchase History</span></a>
+        <a href="refund_and_after_sales.html"><img src="img/refund_and_after_sales.png" alt="icon"><span>Refund/After Sales</span></a>
+    </div>
+
+    <div class="container">
+        <div class="my-orders-section" style="margin-top: 140px;"></div>
+        <h2 class="section-title">My Favorites</h2>
+        <div class="goods-wrap" id="favContainer"></div>
+    </div>
+
+    <div id="detailModal" class="detail-modal">
+        <div class="detail-card">
+            <button id="detailCloseBtn" class="detail-close" type="button">×</button>
+            <img id="detailImage" class="detail-image" src="" alt="item image">
+            <h3 id="detailTitle" class="detail-title"></h3>
+            <p id="detailPrice" class="detail-price"></p>
+            <p id="detailItemId" class="detail-text"></p>
+            <p id="detailCategory" class="detail-text"></p>
+            <p id="detailStatus" class="detail-text"></p>
+            <p id="detailOwner" class="detail-text"></p>
+            <p id="detailDesc" class="detail-text"></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-text">
+            <p>Campus Second-hand Market © 2025 This platform is only open to students of this school. All merchants are prohibited.</p>
+            <p>Transaction Instructions: Conduct the transaction face-to-face in person, inspect the goods and make payment. Be cautious of fraud.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        const container = document.getElementById('favContainer');
+
+        function showTip(message, type = 'error') {
+            const tipBox = document.getElementById('tipBox');
+            tipBox.textContent = message;
+            tipBox.className = `tip-box ${type}`;
+        }
+
+        function requireLogin() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('Please login first to access the platform!');
+                window.location.href = 'home.html';
+                return null;
+            }
+            return currentUser;
+        }
+
+        function getFirstImage(itemImages) {
+            if (!itemImages) return 'https://picsum.photos/220/160';
+            try {
+                const parsed = typeof itemImages === 'string' ? JSON.parse(itemImages) : itemImages;
+                if (Array.isArray(parsed) && parsed.length > 0 && parsed[0]) {
+                    return parsed[0];
+                }
+            } catch (error) {
+                console.error('Image parse error:', error);
+            }
+            return 'https://picsum.photos/220/160';
+        }
+
+        function openDetail(item) {
+            document.getElementById('detailImage').src = getFirstImage(item.item_images);
+            document.getElementById('detailTitle').textContent = item.item_title || 'Untitled item';
+            document.getElementById('detailPrice').textContent = item.item_price != null ? '$' + item.item_price : 'Price not set';
+            document.getElementById('detailItemId').textContent = 'Item ID: ' + (item.item_id ?? 'Not set');
+            document.getElementById('detailCategory').textContent = 'Category: ' + (item.item_category || 'Not set');
+            document.getElementById('detailStatus').textContent = 'Status: ' + (item.item_status || 'unknown');
+            document.getElementById('detailOwner').textContent = 'Publisher: ' + (item.user_name || item.user_id || 'Unknown');
+            document.getElementById('detailDesc').textContent = 'Description: ' + (item.description || 'No description');
+            document.getElementById('detailModal').classList.add('show');
+        }
+
+        function closeDetail() {
+            document.getElementById('detailModal').classList.remove('show');
+        }
+
+        function renderItems(items) {
+            container.innerHTML = '';
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-box">No favorites yet</div>';
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'goods-card';
+
+                const imageSrc = getFirstImage(item.item_images);
+
+                card.innerHTML = `
+                    <i class="fa fa-heart favorite-btn" data-id="${item.item_id}"></i>
+                    <img src="${imageSrc}" class="goods-img" alt="${item.item_title || 'item'}">
+                    <div class="goods-info">
+                        <h3 class="goods-title">${item.item_title || 'Untitled item'}</h3>
+                        <p class="goods-price">$${item.item_price ?? 0}</p>
+                        <p class="goods-owner">Publisher: ${item.user_name || item.user_id || 'Unknown'}</p>
+                        <p class="goods-category">Category: ${item.item_category || 'Not set'}</p>
+                        <p class="goods-status">Status: ${item.item_status || 'unknown'}</p>
+                    </div>
+                `;
+
+                card.querySelector('.favorite-btn').addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const currentUser = localStorage.getItem('currentUser');
+                    const itemId = e.target.dataset.id;
+
+                    try {
+                        const response = await fetch(`${API_BASE}/api/favourite/remove`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                user_id: currentUser,
+                                item_id: itemId
+                            })
+                        });
+
+                        const result = await response.json();
+                        if (!result.success) {
+                            showTip(result.msg || 'Failed to remove favourite');
+                            return;
+                        }
+
+                        card.remove();
+                        if (!container.children.length) {
+                            container.innerHTML = '<div class="empty-box">No favorites yet</div>';
+                        }
+                    } catch (error) {
+                        console.error('Remove favourite error:', error);
+                        showTip('Failed to connect to favourite table.');
+                    }
+                });
+
+                card.addEventListener('click', () => openDetail(item));
+                container.appendChild(card);
+            });
+        }
+
+        async function loadFavorites() {
+            const currentUser = requireLogin();
+            if (!currentUser) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/favourite/list/${currentUser}`);
+                const result = await response.json();
+
+                if (!result.success || !Array.isArray(result.data)) {
+                    showTip('Failed to load favourite data.');
+                    renderItems([]);
+                    return;
+                }
+
+                renderItems(result.data);
+                document.getElementById('navAvatar').src = './img/Default user avatar.png';
+                showTip('Favourite data loaded successfully.', 'success');
+            } catch (error) {
+                console.error('Load favourite list error:', error);
+                showTip('Failed to connect to favourite table.');
+                renderItems([]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navAvatar = document.getElementById('navAvatar');
+            const detailModal = document.getElementById('detailModal');
+            const detailCloseBtn = document.getElementById('detailCloseBtn');
+
+            navAvatar.addEventListener('click', () => {
+                window.location.href = 'user.html';
+            });
+
+            detailCloseBtn.addEventListener('click', closeDetail);
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) closeDetail();
+            });
+
+            loadFavorites();
+        });
+
+        document.addEventListener('click', function (e) {
+            const isLoggedIn = localStorage.getItem('currentUser');
+            if (!isLoggedIn) {
+                const target = e.target.closest('a, button, .open-chat');
+                if (target) {
+                    e.preventDefault();
+                    alert('Please login first!');
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

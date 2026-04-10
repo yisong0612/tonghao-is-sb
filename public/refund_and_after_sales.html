@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Second-hand Community - Your campus idle goods trading platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<script>
+        window.addEventListener('load', () => {
+            const header = document.querySelector('header');
+            const menu = document.querySelector('.user-menu');
+            const orders = document.querySelector('.my-orders-section');
+
+            
+            orders.style.marginTop = (header.offsetHeight + menu.offsetHeight + 10) + 'px';
+        });
+</script>
+<body>
+    
+    <header>
+        <div class="container nav-wrap">
+            <a href="home.html" class="logo">Campus<span>Second-hand</span>Market</a>
+            <ul class="nav-list">
+                <li><a href="home.html" style="color: #409eff; border-bottom: 2px solid #409eff;">Home</a></li>
+                <li><a href="all goods.html">All goods</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="publish.html" class="publish-btn">Sell Items</a></li>
+                <li class="avatar-box">
+                    <img src="./img/Default user avatar.png" alt="Default user avatar" class="avatar-img" id="navAvatar">
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            
+            const navAvatar = document.getElementById('navAvatar');
+
+            
+            fetch('../db/data.json')  
+                .then(res => res.json())
+                .then(users => {
+                    const currentUser = users[0];
+
+                    
+                    navAvatar.src = currentUser.avatar || './img/Default user avatar.png';
+                })
+                .catch(err => console.error("error user message:", err));
+
+            
+            navAvatar.addEventListener('click', () => {
+                window.location.href = 'user.html';
+            });
+        </script>
+    </header>
+
+    <div class="user-menu">
+        <a href="cart.html">
+        <img src="img/cart.png" alt="icon">
+        <span>Cart</span>
+        </a>
+        <a href="pending_payment.html">
+            <img src="img/pending_payment.png" alt="icon">
+            <span>Pending Payment</span>
+        </a>
+        <a href="favorites.html">
+            <img src="img/favorites.png" alt="icon">
+            <span>Favorites</span>
+        </a>
+        <a href="purchase_history.html">
+            <img src="img/purchase_history.png" alt="icon">
+            <span>Purchase History</span>
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="my-orders-section" style="margin-top: 140px;"></div>
+
+            <h2 class="section-title">Refund/After Sales</h2>
+            <div class="goods-wrap">
+                <div class="goods-card">
+                    
+                    <i class="fa fa-heart favorite-btn"></i>
+                    <input type="checkbox" class="goods-select">
+                    <img src="https://picsum.photos/240/180?random=1" alt="school Second-hand" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">University Mathematics Textbook</h3>
+                        <p class="goods-price">25</p>
+                        <p class="goods-owner">Publisher: Li </p>
+                    </div>
+                </div>
+                    
+                    <div class="goods-card">
+                       
+                    <i class="fa fa-heart favorite-btn"></i>
+                    <input type="checkbox" class="goods-select">
+                    <img src="https://picsum.photos/240/180?random=1" alt="school Second-hand" class="goods-img">
+                    <div class="goods-info">
+                        <h3 class="goods-title">Xiaomi Mi Pad 5 </h3>
+                        <p class="goods-price">999</p>
+                        <p class="goods-owner">Publisher: Bob</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="cart-footer" style="
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #409eff;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+    ">
+        <span>Total: $<span id="totalPrice">0</span></span>
+        <button id="checkoutBtn" style="
+            background-color: #67c23a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        ">Checkout</button>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    const checkboxes = document.querySelectorAll('.goods-select');
+    const totalPriceSpan = document.getElementById('totalPrice');
+
+    function updateTotal() {
+        let total = 0;
+
+        checkboxes.forEach(cb => {
+            if (cb.checked) {
+
+                
+                const card = cb.closest('.goods-card');
+
+                
+                const priceText = card.querySelector('.goods-price').textContent;
+
+                console.log("get price:", priceText); 
+
+                
+                const price = parseFloat(priceText.replace('$', '').trim()) || 0;
+
+                total += price;
+            }
+        });
+
+        console.log("total price:", total);
+        totalPriceSpan.textContent = total;
+    }
+
+    
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', updateTotal);
+    });
+
+    
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    checkoutBtn.addEventListener('click', () => {
+
+        const checkboxes = document.querySelectorAll('.goods-select');
+        let hasSelected = false;
+
+        checkboxes.forEach(cb => {
+            if (cb.checked) hasSelected = true;
+        });
+
+        if (!hasSelected) {
+            alert("Please select at least one item!");
+            return;
+        }
+
+        alert("✅Application submitted, please wait for platform review.....");
+
+    });
+
+});
+    
+            const favBtns = document.querySelectorAll('.favorite-btn');
+
+            favBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.classList.toggle('active'); 
+                });
+            });
+        
+        document.addEventListener('click', function (e) {
+
+            const isLoggedIn = localStorage.getItem('currentUser');
+
+            if (!isLoggedIn) {
+
+                
+                const target = e.target.closest('a, button, .open-chat');
+
+                if (target) {
+                    e.preventDefault(); 
+
+                    alert("Please login first!");
+
+                    
+                    setTimeout(() => {
+                        window.location.href = "login_and_signup.html";
+                    }, 500);
+                }
+            }
+
+        });
+</script>
+ 
+    <footer>
+        <div class="footer-text">
+            <p>Campus Second-hand Market © 2025 This platform is only open to students of this school. </p>
+        </div>
+    </footer>
+</body>
+</html>

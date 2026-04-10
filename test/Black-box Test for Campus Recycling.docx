@@ -1,0 +1,36 @@
+1. Successfully Posting a Valid Item
+The user logs in and goes to the Create Listing page. They enter a valid title such as “Used Textbook”, select an appropriate category, input a reasonable price like “15”, write a clear description, 
+upload at least one JPG or PNG image, and fill in valid contact information. After clicking the Submit button, the system should accept the submission successfully. The new item then appears on the Goods page, 
+with the title, price, description, contact details, and image all displayed correctly, and no error messages should appear.
+
+2. Submitting an Item with Missing Required Fields
+While on the Create Listing page, the user deliberately leaves one or more required fields empty, such as the title or price, while filling in the other fields normally. When they click the Submit button, 
+the system should prevent the submission and display a clear error message indicating which fields are missing. The incomplete item should not appear on the Goods page.
+
+3. Entering Invalid Price Data
+The user fills in all other valid information on the Create Listing page, but enters invalid data in the price field, such as letters or symbols instead of a number. After uploading a valid image and clicking Submit, 
+the system should reject the submission. A specific validation error message should appear for the price field, the user should remain on the same page to correct the input, and the listing should not be created.
+
+4. Uploading More Images Than the Allowed Maximum
+After entering valid item details on the Create Listing page, the user tries to upload more images than the system allows. When they click the Submit button, the system should block the excess uploads and show a warning message, 
+for example, “Maximum 5 images allowed.” The submission should only proceed once the number of images is reduced to within the allowed limit.
+
+5. Verifying Item Display on the Goods Page
+The user navigates to the Goods page and browses the list of available items. Each product card should clearly display the item image (thumbnail), title, price, and seller information. 
+The overall layout should look clean and well-organized, with the page loading completely without any missing content or broken sections.
+
+6. Searching for Items Using Keywords
+The user goes to the Home page or Goods page, enters a keyword such as “textbook” into the search bar, and clicks the Search button. The system should return relevant items that match the keyword, 
+while unrelated items are filtered out or significantly reduced. The search results page should load properly with accurate information displayed.
+
+7. Filtering Goods by Category
+On the Goods page, the user selects a specific category from the dropdown menu, such as “Books” or “Electronics.” After applying the filter, only items from the selected category should be shown, 
+while items from other categories are hidden. The filtering should work smoothly without any page errors or unexpected reloads.
+
+8. Successful Login with Valid Credentials
+The user opens the Login page, enters a correct email address and password, and clicks the Login button. The login should be accepted, and the user should be redirected to the correct page (usually the Home or Goods page). 
+No error messages should appear, and the navigation bar should show that the user is now logged in.
+
+9. Attempting Login with Invalid Credentials
+The user goes to the Login page and enters either an incorrect email or a wrong password, then clicks the Login button. 
+The system should deny the login attempt and display a clear error message such as “Invalid email or password.” The user should remain on the Login page with no successful login occurring.

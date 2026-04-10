@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Second-hand Community - Your campus idle goods trading platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tip-box {
+            display: none;
+            max-width: 720px;
+            margin: 100px auto 0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .tip-box.error {
+            display: block;
+            background: #fff2f0;
+            border: 1px solid #ffccc7;
+            color: #cf1322;
+        }
+        .tip-box.success {
+            display: block;
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            color: #389e0d;
+        }
+        #preview {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const isLoggedIn = localStorage.getItem('currentUser');
+        if (!isLoggedIn) {
+            alert("Please login first to access the platform!");
+            window.location.href = "index.html";
+        }
+    });
+</script>
+<body>
+    <header>
+        <div class="container nav-wrap">
+            <a href="home.html" class="logo">Campus<span>Second-hand</span>Market</a>
+            <ul class="nav-list">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="all goods.html">All goods</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="publish.html" class="publish-btn" style="color: #409eff; border-bottom: 2px solid #409eff;">Sell Items</a></li>
+                <li class="avatar-box">
+                    <img src="./img/Default user avatar.png" class="avatar-img" id="navAvatar" alt="avatar">
+                </li>
+            </ul>
+        </div>
+        <div id="success-message" style="
+            display:none;
+            position:fixed;
+            top:80px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#67c23a;
+            color:white;
+            padding:12px 30px;
+            border-radius:6px;
+            font-size:16px;
+            z-index:1000;">
+            ✅ Submitted successfully!
+        </div>
+    </header>
+
+    <div id="tipBox" class="tip-box"></div>
+
+    <div class="page-container">
+        <h2 class="page-title">List available items for sale</h2>
+
+        <form class="publish-form">
+            <div class="form-group">
+                <label for="goods-title">Title</label>
+                <input type="text" id="goods-title" placeholder="Please enter the product title (for example: New Calculus textbook with accompanying exercise book)">
+            </div>
+
+            <div class="form-group">
+                <label for="goods-category">Classify</label>
+                <select id="goods-category">
+                    <option value="">Please select a category</option>
+                    <option value="book">Textbooks & Supplementary Materials</option>
+                    <option value="digital">Digital Products</option>
+                    <option value="life">Daily Necessities</option>
+                    <option value="clothes">Apparel, Shoes & Bags</option>
+                    <option value="sports">Sports & Cultural Goods</option>
+                    <option value="transport">Transportation Tools</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="goods-price">Price</label>
+                <input type="number" id="goods-price" placeholder="type price, 0 is for free" min="0" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="goods-desc">Description</label>
+                <textarea id="goods-desc" placeholder="Please provide a detailed description of the product: its condition (new or used), usage duration, any damages, and the transaction method, etc."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Product Images (You can upload up to 5 images at most.)</label>
+                <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload images</p>
+                    <input type="file" id="file-input" accept="image/*" multiple style="display:none">
+                </div>
+                <div id="preview"></div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="submitForm()">Publish</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-text">
+            <p>Campus Second-hand Market © 2025 This platform is only open to students of this school. </p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        let imageFiles = [];
+        const navAvatar = document.getElementById('navAvatar');
+
+        function showTip(message, type = 'error') {
+            const tipBox = document.getElementById('tipBox');
+            tipBox.textContent = message;
+            tipBox.className = `tip-box ${type}`;
+        }
+
+        async function loadCurrentUserAvatar() {
+            const currentUserId = localStorage.getItem("currentUser");
+            if (!currentUserId) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/users`);
+                const result = await response.json();
+
+                if (!result.success || !Array.isArray(result.data)) return;
+
+                const currentUser = result.data.find(u =>
+                    String(u.user_id).toLowerCase() === String(currentUserId).toLowerCase()
+                );
+
+                navAvatar.src = './img/Default user avatar.png';
+                if (!currentUser) {
+                    showTip('Current user was not found in database.');
+                }
+            } catch (err) {
+                console.error("Load user error:", err);
+                showTip('Failed to read user information from database.');
+            }
+        }
+
+        navAvatar.addEventListener('click', () => {
+            window.location.href = 'user.html';
+        });
+
+        async function submitForm() {
+            const title = document.getElementById("goods-title").value.trim();
+            const category = document.getElementById("goods-category").value;
+            const price = document.getElementById("goods-price").value.trim();
+            const description = document.getElementById("goods-desc").value.trim();
+            const userId = localStorage.getItem("currentUser");
+
+            if (!userId) {
+                alert("Please login first!");
+                window.location.href = "home.html";
+                return;
+            }
+
+            if (!title || !category || !price || !description || imageFiles.length === 0) {
+                showTip("Please complete all required fields and upload at least one image.");
+                return;
+            }
+
+            if (Number(price) < 0) {
+                showTip("Price cannot be less than 0.");
+                return;
+            }
+
+            try {
+                const imageBase64List = await Promise.all(
+                    imageFiles.map(file => new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    }))
+                );
+
+                const publishData = {
+                    user_id: userId,
+                    item_title: title,
+                    item_category: category,
+                    item_price: parseFloat(price),
+                    item_status: "available",
+                    item_images: JSON.stringify(imageBase64List),
+                    description: description
+                };
+
+                const response = await fetch(`${API_BASE}/api/item/publish`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(publishData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showTip('Item published successfully.', 'success');
+                    const msg = document.getElementById("success-message");
+                    msg.style.display = "block";
+
+                    document.getElementById("goods-title").value = '';
+                    document.getElementById("goods-category").value = '';
+                    document.getElementById("goods-price").value = '';
+                    document.getElementById("goods-desc").value = '';
+                    document.getElementById("preview").innerHTML = '';
+                    imageFiles = [];
+
+                    setTimeout(() => {
+                        window.location.href = "home.html";
+                    }, 1500);
+                } else {
+                    showTip(`Publish failed: ${result.msg}`);
+                }
+            } catch (error) {
+                console.error("Publish error:", error);
+                showTip("Publish failed! Please check whether server.js and MySQL are running.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCurrentUserAvatar();
+
+            const fileInput = document.getElementById("file-input");
+            const preview = document.getElementById("preview");
+
+            fileInput.addEventListener("change", function () {
+                const files = Array.from(fileInput.files);
+
+                if (imageFiles.length + files.length > 5) {
+                    showTip("You can upload up to 5 images only.");
+                    return;
+                }
+
+                files.forEach(file => {
+                    if (!file.type.startsWith("image/")) return;
+
+                    imageFiles.push(file);
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const wrapper = document.createElement("div");
+                        wrapper.style.display = "inline-block";
+                        wrapper.style.position = "relative";
+                        wrapper.style.margin = "5px";
+                        wrapper.style.width = "100px";
+                        wrapper.style.height = "100px";
+
+                        const img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.style.width = "100px";
+                        img.style.height = "100px";
+                        img.style.objectFit = "cover";
+                        img.style.cursor = "pointer";
+
+                        const delBtn = document.createElement("span");
+                        delBtn.innerHTML = "X";
+                        delBtn.style.position = "absolute";
+                        delBtn.style.top = "-8px";
+                        delBtn.style.right = "-8px";
+                        delBtn.style.width = "22px";
+                        delBtn.style.height = "22px";
+                        delBtn.style.background = "red";
+                        delBtn.style.color = "white";
+                        delBtn.style.borderRadius = "50%";
+                        delBtn.style.textAlign = "center";
+                        delBtn.style.lineHeight = "22px";
+                        delBtn.style.fontSize = "16px";
+                        delBtn.style.fontWeight = "bold";
+                        delBtn.style.cursor = "pointer";
+                        delBtn.style.zIndex = "10";
+
+                        delBtn.onclick = function () {
+                            preview.removeChild(wrapper);
+                            imageFiles = imageFiles.filter(f => f !== file);
+                        };
+
+                        wrapper.appendChild(img);
+                        wrapper.appendChild(delBtn);
+                        preview.appendChild(wrapper);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+
+                fileInput.value = "";
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            const isLoggedIn = localStorage.getItem('currentUser');
+            if (!isLoggedIn) {
+                const target = e.target.closest('a, button, .open-chat');
+                if (target) {
+                    e.preventDefault();
+                    alert("Please login first!");
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 300);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
